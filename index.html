@@ -45,6 +45,9 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
 </head>
 <body>
 
@@ -387,7 +390,7 @@
                 <form id="submit-form" action="">
                     <div class="row">
                         <div class="col-sm-6">
-                            <input type="text" name="name" class="form-control mt-x-0" placeholder="Name" required>
+                            <input type="text" id="name" name="name" class="form-control mt-x-0" placeholder="Name" required>
                         </div>
                         <div class="col-sm-6">
                             <input type="email" name="email" class="form-control" placeholder="Email" required>   
@@ -401,35 +404,40 @@
             </div>
         </section><!-- /.section-form -->
 
-
-        <script>
-        $("#submit-form").submit((e)=>{
-            e.preventDefault()
-            $.ajax({
-                url:"https://script.google.com/macros/s/AKfycbwU_uWxip32XEJfBlRHxDMzs0e5uHq-n1tnjldPImrh_OKN2xdO9FvFK9xkjB877uOY/exec",
-                data:$("#submit-form").serialize(),
-                method:"post",
-                success:function (response){
-                    alert("Form submitted successfully")
-                    window.location.reload()
-                    //window.location.href="https://google.com"
-                },
-                error:function (err){
-                    alert("Something Error")
-    
-                }
-            })
-        })
-
-        </script>
-
     </main><!-- /#main -->
+
+    <script>
+
+      document.getElementById("submit-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const nameValue = document.getElementById("name").value;
+      const trimmedName = nameValue.trim();
+      if (trimmedName === "") {
+        alert("Space not allowed. Please enter your name correctly.");
+        return; 
+      }
+
+      $.ajax({
+        url: "https://script.google.com/macros/s/AKfycbxxwl-L7R1naqZUpDaEi6-Qzrb3TU4ww-g1ANuMlNrX0nYNRtQxnDAttOe9PA4V2obV/exec",
+        data: $("#submit-form").serialize(),
+        method: "post",
+        success: function(response) {
+          alert("Form submitted successfully");
+          window.location.reload();
+        },
+        error: function(err) {
+          alert("Something went wrong");
+        }
+      });
+    });
+
+  </script>
 
     <footer id="colophon" class="site-footer">
         <div class="container">
             <div class="row">
                 <div class="col-sm-4 col-xs-12">
-                    <a class="icon linkedin-bg" href="www.linkedin.com/in/rahul-r-3354381b2"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a class="icon linkedin-bg" href="https://www.linkedin.com/in/rahul-r-3354381b2/"><i class="fa-brands fa-linkedin-in"></i></a>
                     <a class="icon whatsapp-bg" href="https://wa.link/0telvz"><i class="fa-brands fa-whatsapp"></i></a>
                     <a class="icon instagram-bg" href="https://instagram.com/_r._a._h._u._l_007_?utm_source=qr&igshid=MzNlNGNkZWQ4Mg%3D%3D"><i class="fa-brands fa-instagram"></i></a>
                 </div>
